@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="/css/main.css" media="screen" title="no title" charset="utf-8">
+
+    <link rel="stylesheet"  type="text/css" href="css/main.css">
   <title>Code and Magick</title>
 </head>
 <body>
@@ -76,41 +77,44 @@
 </main>
 
 <div class="overlay-container invisible">
-  <form class="overlay review-form" action="index.html" method="post">
+  <form class="overlay review-form" id="review-form"action="index.html" method="get" >
     <h2 class="review-form-title">Оставить отзыв</h2>
     <span class="review-form-close">&times;</span>
 
     <fieldset class="review-form-group review-form-group-mark">
-      <span class="review-form-label">Оценка</label><br>
-      <input type="radio" name="review-mark" id="review-mark-5" value="5"><label class="review-mark-label review-mark-label-5" for="review-mark-5">1</label>
-      <input type="radio" name="review-mark" id="review-mark-4" value="4"><label class="review-mark-label review-mark-label-4" for="review-mark-4">2</label>
+      <label class="review-form-label">Оценка</label><br>
+      <input type="radio" name="review-mark" id="review-mark-5" value="1"><label class="review-mark-label review-mark-label-5" for="review-mark-5">1</label>
+      <input type="radio" name="review-mark" id="review-mark-4" value="2"><label class="review-mark-label review-mark-label-4" for="review-mark-4">2</label>
       <input type="radio" name="review-mark" id="review-mark-3" value="3" checked><label class="review-mark-label review-mark-label-3" for="review-mark-3">3</label>
-      <input type="radio" name="review-mark" id="review-mark-2" value="2"><label class="review-mark-label review-mark-label-2" for="review-mark-2">4</label>
-      <input type="radio" name="review-mark" id="review-mark-1" value="1"><label class="review-mark-label review-mark-label-1" for="review-mark-1">5</label>
+      <input type="radio" name="review-mark" id="review-mark-2" value="4"><label class="review-mark-label review-mark-label-2" for="review-mark-2">4</label>
+      <input type="radio" name="review-mark" id="review-mark-1" value="5"><label class="review-mark-label review-mark-label-1" for="review-mark-1">5</label>
     </fieldset>
 
     <fieldset class="review-form-group">
       <label for="review-name" class="review-form-label">Имя</label><br>
-      <input type="text" name="review-name" id="review-name" class="review-form-field review-form-field-name">
+      <input type="text" name="review-name" id="review-name" class="review-form-field review-form-field-name" required onchange="validate();">
     </fieldset>
 
     <fieldset class="review-form-group">
       <label for="review-text" class="review-form-label">Отзыв</label><br>
-      <textarea name="review-text" id="review-text" class="review-form-field review-form-field-text" cols="32" rows="8"></textarea>
+      <textarea name="review-text" id="review-text" class="review-form-field review-form-field-text" cols="32" rows="8" required onchange="validate();"></textarea>
     </fieldset>
+      <button class="review-form-control review-submit" type="submit">Добавить отзыв</button>
+    <div id='review-form-controls' class="review-form-controls">
 
-    <div class="review-form-controls">
-      <button class="review-form-control review-submit" type="submut">Добавить отзыв</button>
       <div class="review-form-control review-fields">
+          <p class="review-fields-title">пожалуйста заполните все необходимые поля</p>
         Осталось заполнить:<br>
-        <label for="review-name" class="review-fields-label review-fields-name">имя</label>
-        <label for="review-text" class="review-fields-label review-fields-text">отзыв</label>
+
+        <label for="review-name"  id='review-fields-name' class="review-fields-label review-fields-name">имя</label>
+        <label for="review-text" id='review-fields-text' class="review-fields-label review-fields-text">отзыв</label>
+
       </div>
     </div>
   </form>
 </div>
-
-<script src="js/form.js"></script>
+<script src="js/cookies.js" type="text/javascript"></script>
+<script src="js/form-validate.js" type="text/javascript"></script>
 
 </body>
 </html>
