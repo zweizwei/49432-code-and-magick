@@ -16,56 +16,34 @@ function validate(){
     var reviewNameLenght = reviewName.value.length,
         reviewTextLenght = reviewText.value.length;
 
+    reviewFormControls.classList.add('hide');
+    reviewFieldslName.classList.add('hide');
+    reviewFieldsText.classList.add('hide');
+
     if (reviewNameLenght === 0 || reviewTextLenght === 0) {
-        if (reviewFormControls.classList.contains('hide')){
-            reviewFormControls.classList.remove('hide');
+        reviewFormControls.classList.remove('hide');
+        if (reviewNameLenght === 0){
+            reviewFieldslName.classList.remove('hide');
         }
-        if (reviewNameLenght === 0) {
-            if (reviewFieldslName.classList.contains('hide')){
-                reviewFieldslName.classList.remove('hide');
-            }
-        } else if (reviewNameLenght !== 0) {
-            reviewFieldslName.classList.add('hide');
+        if  (reviewTextLenght === 0 ){
+            reviewFieldsText.classList.remove('hide');
         }
-        if (reviewTextLenght === 0 ){
-            if (reviewFieldsText.classList.contains('hide')){
-                reviewFieldsText.classList.remove('hide');
-            }
-        } else {
-            reviewFieldsText.classList.add('hide');
-        }
-    } else {
+        return false;
+    }   else    {
         console.log('validated');
         reviewFormControls.classList.add('hide');
-    }
+        return  true;
+        }
 }
 
-
 formElement.onsubmit = function(evt){
-    evt.preventDefault();
+
     var form = formElement,
         reviewNameLenght = reviewName.value.length,
         reviewTextLenght = reviewText.value.length;
 
-    if (reviewNameLenght === 0 || reviewTextLenght === 0) {
-        if (reviewFormControls.classList.contains('hide')){
-            reviewFormControls.classList.remove('hide');
-        }
-        if (reviewNameLenght === 0) {
-            if (reviewFieldslName.classList.contains('hide')){
-                reviewFieldslName.classList.remove('hide');
-            }
-        } else if (reviewNameLenght !== 0) {
-            reviewFieldslName.classList.add('hide');
-        }
-        if (reviewTextLenght === 0 ){
-            if (reviewFieldsText.classList.contains('hide')){
-                reviewFieldsText.classList.remove('hide');
-            }
-        } else {
-            reviewFieldsText.classList.add('hide');
-        }
-    } else {
+    if (validate()) {
+        evt.preventDefault();
         console.log('validated');
         for (var i = 0; i < reviewMark.length; i++) {
             if (reviewMark[i].checked) {
