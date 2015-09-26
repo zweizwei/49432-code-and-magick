@@ -15,17 +15,18 @@
 
 //validate function
 
-  var formElement = document.forms['review-form'],
-      reviewName = formElement['review-name'],
-      reviewText = formElement['review-text'],
+  var formElement = document.querySelector('.review-form'),
+      reviewName = document.querySelector('.review-form-field-name'),
+      reviewText = document.querySelector('.review-form-field-text'),
       reviewMark = document.querySelectorAll('[name=review-mark]');
-  reviewNameLenght = 0,
+      reviewNameLenght = 0,
       reviewTextLenght = 0,
 
-      reviewFormControls = document.querySelector('#review-form-controls'),
-      reviewFieldslName = document.querySelector('#review-fields-name'),
-      reviewFieldsText = document.querySelector('#review-fields-text');
+      reviewFormControls = document.querySelector('.review-form-controls'),
+      reviewFieldslName = document.querySelector('.review-fields-name'),
+      reviewFieldsText = document.querySelector('.review-fields-text');
 
+    console.log(formElement);
 
   function validate(){
 
@@ -52,8 +53,12 @@
     }
   }
 
-  reviewName.onchange="validate();"
-  reviewText.onchange="validate();"
+  reviewName.onchange = function(){
+      validate();
+  }
+  reviewText.onchange = function () {
+      validate();
+  }
 
   formElement.onsubmit = function(evt){
 
@@ -62,6 +67,7 @@
         reviewTextLenght = reviewText.value.length;
 
     if (validate()) {
+        console.log('validated');
       evt.preventDefault();
       console.log('validated');
       for (var i = 0; i < reviewMark.length; i++) {
@@ -75,6 +81,8 @@
       docCookies.setItem('review-name', reviewName.value,
           calculateDateExpire());
       formElement.submit();
+    } else {
+        console.log('notvalidated');
     }
   };
 
