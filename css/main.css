@@ -399,22 +399,9 @@ input[type=radio]:checked + .review-mark-label {
 }
 
 
-.review-nophoto {
-    background-image: none;
+.review-load-failure {
+    background-image: url('../img/user-1.jpg');
+    background-size: 128px 128px;
+    background-repeat: no-repeat;
     }
 
-.review-nophoto::before {
-    bottom: 0;
-    color: #aaa8a1;
-    content: 'У этого отеля пока нет фото';
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    left: 0;
-    line-height: 1.1;
-    padding: 88px 60px 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 0;
-    }
