@@ -12,9 +12,21 @@
         '8': 'review-rating-five'
         };
 
-    var reviewsContainer = document.querySelector('.reviews-list'),
-        REQUEST_FAILURE_TIMEOUT = 10000;
+    var readyState = {
+        'UNSENT' : 0,
+        'OPENED' : 1,
+        'HEADERS_RECEIVED' : 2,
+        'LOADING' : 3,
+        'DONE' : 4
+    };
 
+    var REQUEST_FAILURE_TIMEOUT = 10000;
+
+    var reviewsContainer = document.querySelector('.reviews-list');
+
+    function renderReviews(reviewsToRender){
+
+    var reviewsContainer = document.querySelector('.reviews-list');
         reviewsContainer.innerHTML = '';
 
         var reviewTemplate = document.getElementById('review-template');
@@ -57,6 +69,48 @@
     }
 
     reviewsContainer.appendChild(reviewFragment);
+}
 
+
+
+
+    function loadReviews(callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.timeout = REQUEST_FAILURE_TIMEOUT;
+        xhr.open('get', 'data/reviews.json');
+        xhr.send();
+
+        xhr.onreadystatechange = function(evt) {
+            var loadedXhr = evt.target;
+
+            switch (loadedXhr.readyState) {
+                case readyState.OPENED:
+                    reviewsContainer.classList.add('reviews-list-loading');
+                    break;
+
+                case readyState.DONE:
+                    if (loadedXhr.status == 200) {
+                        var data = loadedXhr.response;
+                        reviewsContainer.classList.remove('reviews-list-loading');
+                        reviewsContainer.classList.remove('reviews-load-failure');
+                        callback(JSON.parse(data));
+                    }
+
+                    if (loadedXhr.status > 400) {
+                        showFailure();
+                    }
+                    break;
+                default : break;
+            }
+        };
+        xhr.ontimeout = function() {
+            showFailure();
+        }
+    }
+
+    loadReviews(function(loadedReviews) {
+        reviews = loadedReviews;
+        renderReviews(reviews);
+    });
 
 })();
