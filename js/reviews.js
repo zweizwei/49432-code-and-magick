@@ -23,13 +23,23 @@
     var REQUEST_FAILURE_TIMEOUT = 10000;
     var FILTER_ID = 'filterID';
 
+
+    var PAGE_SIZE = 3;
+
     var reviews;
 
     var reviewsContainer = document.querySelector('.reviews-list');
 
-    function renderReviews(reviewsToRender){
+    function renderReviews(reviewsToRender, pageNumber){
 
-    var reviewsContainer = document.querySelector('.reviews-list');
+            pageNumber = pageNumber || 0;
+
+        var reviewsFrom = pageNumber * PAGE_SIZE;
+        var reviewsTo = reviewsFrom + PAGE_SIZE;
+
+        reviewsToRender = reviewsToRender.slice(reviewsFrom, reviewsTo);
+
+        var reviewsContainer = document.querySelector('.reviews-list');
         reviewsContainer.innerHTML = '';
 
         var reviewTemplate = document.getElementById('review-template');
