@@ -26,7 +26,6 @@
       reviewFieldslName = document.querySelector('.review-fields-name'),
       reviewFieldsText = document.querySelector('.review-fields-text');
 
-    console.log(formElement);
 
   function validate(){
 
@@ -46,6 +45,7 @@
         reviewFieldsText.classList.remove('hide');
       }
       return false;
+
     }   else    {
       console.log('validated');
       reviewFormControls.classList.add('hide');
@@ -61,15 +61,16 @@
   }
 
   formElement.onsubmit = function(evt){
+      evt.preventDefault();
 
-    var form = formElement,
+
+
+      var form = formElement,
         reviewNameLenght = reviewName.value.length,
         reviewTextLenght = reviewText.value.length;
 
-    if (validate()) {
-        console.log('validated');
-      evt.preventDefault();
-      console.log('validated');
+    if (validate() == true) {
+      console.log(validate());
       for (var i = 0; i < reviewMark.length; i++) {
         if (reviewMark[i].checked) {
           docCookies.removeItem('review-mark');
@@ -78,15 +79,12 @@
         }
       }
       docCookies.removeItem('review-name');
-      docCookies.setItem('review-name', reviewName.value,
-          calculateDateExpire());
+      docCookies.setItem('review-name', reviewName.value, calculateDateExpire());
       formElement.submit();
     } else {
-        console.log('notvalidated');
+        console.log(validate());
     }
   };
-
-
 
 
 
