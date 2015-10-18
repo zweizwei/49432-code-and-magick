@@ -23,14 +23,29 @@
     var REQUEST_FAILURE_TIMEOUT = 10000;
     var FILTER_ID = 'filterID';
 
+
+    var PAGE_SIZE = 3;
+
     var reviews;
 
     var reviewsContainer = document.querySelector('.reviews-list');
 
-    function renderReviews(reviewsToRender){
+    function renderReviews(reviewsToRender, pageNumber, replace){
+        var reviewsContainer = document.querySelector('.reviews-list');
 
-    var reviewsContainer = document.querySelector('.reviews-list');
-        reviewsContainer.innerHTML = '';
+        replace = typeof replace !== 'undefined' ? replace : true;
+
+            pageNumber = pageNumber || 0;
+        var reviewsFrom = pageNumber * PAGE_SIZE;
+
+        var reviewsTo = reviewsFrom + PAGE_SIZE;
+
+        reviewsToRender = reviewsToRender.slice(reviewsFrom, reviewsTo);
+
+        if (replace){
+            reviewsContainer.classList.remove('review-load-failure')
+            reviewsContainer.innerHTML = '';
+        }
 
         var reviewTemplate = document.getElementById('review-template');
         var reviewFragment = document.createDocumentFragment();
@@ -178,12 +193,17 @@
 
     function setActiveFilter(filterID) {
         currentReviews = filterReviews(reviews, filterID);
-        renderReviews(currentReviews);
+        currentPage = 0;
+        renderReviews(currentReviews, currentPage, true);
 
 
 
 
     }
+
+    window.addEventListener('loadneeded', function() {
+        renderHotels(currentHotels, currentPage++, false);
+    });
 
 
     initFilters();
