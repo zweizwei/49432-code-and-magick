@@ -27,6 +27,7 @@
     var PAGE_SIZE = 3;
 
     var reviews;
+        console.log(reviews);
 
     var currentReviews;
     var currentPage = 0;
@@ -222,9 +223,10 @@
     }
 
 
-
     initFilters();
     setActiveFilter(('reviews-all'));
+
+    console.log(currentReviews);
 
 
 
