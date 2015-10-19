@@ -28,6 +28,9 @@
 
     var reviews;
 
+    var currentReviews;
+    var currentPage = 0;
+
     var reviewsContainer = document.querySelector('.reviews-list');
 
     function renderReviews(reviewsToRender, pageNumber, replace){
@@ -128,10 +131,19 @@
         }
     }
 
+
+    //XHR записал данные в reviews - которая глобальная
+
     loadReviews(function(loadedReviews) {
         reviews = loadedReviews;
+
+        console.log(reviews);
         renderReviews(reviews);
     });
+
+    //но если она глобальная и функция была вызвана, почему я не могу запросить ее значение тут?
+
+    console.log(reviews);
 
 
     function filterReviews(reviews, filterID) {
@@ -184,7 +196,6 @@
 
     function initFilters() {
         var filtersContainer = document.querySelector('.reviews-filter');
-
         filtersContainer.addEventListener('click', function(evt) {
             var clickedFilter = evt.target;
             setActiveFilter(clickedFilter.id);
@@ -193,21 +204,29 @@
 
     function setActiveFilter(filterID) {
         currentReviews = filterReviews(reviews, filterID);
-        currentPage = 0;
         renderReviews(currentReviews, currentPage, true);
-
-
-
-
     }
 
-    window.addEventListener('loadneeded', function() {
-        renderHotels(currentHotels, currentPage++, false);
+    var moreReviews = document.querySelector('.reviews-controls-more');
+        console.log(moreReviews);
+
+    moreReviews.addEventListener('click', function() {
+
+        if (isNextPageAvailable()){
+            renderReviews(currentReviews, currentPage++, false);
+        }
     });
+
+    function isNextPageAvailable() {
+        return currentPage < Math.ceil(reviews.length / PAGE_SIZE);
+    }
+
 
 
     initFilters();
     setActiveFilter(('reviews-all'));
+
+
 
 
 })();
