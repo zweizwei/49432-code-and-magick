@@ -223,11 +223,12 @@
     }
 
 
+
+
     initFilters();
     setActiveFilter(('reviews-all'));
 
     console.log(currentReviews);
-
 
 
 
