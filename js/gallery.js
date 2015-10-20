@@ -44,7 +44,7 @@
 
   galleryContainer.addEventListener('click', function(evt) {
         evt.preventDefault();
-        console.log('try to open gallery');
+
         if (evt.target.parentNode.classList.contains('photogallery-image')) {
               showGallery();
             }
