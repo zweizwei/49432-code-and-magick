@@ -147,9 +147,9 @@
     console.log(reviews);
 
 
-    function filterReviews(reviews, filterID) {
+    function filterReviews(reviewsToFilter, filterID) {
 
-        var filteredReviews = reviews.slice(0);
+        var filteredReviews = reviewsToFilter.slice(0);
 
         switch (filterID) {
             case 'reviews-recent':
@@ -205,6 +205,7 @@
 
     function setActiveFilter(filterID) {
         currentReviews = filterReviews(reviews, filterID);
+        console.log(currentReviews);
         renderReviews(currentReviews, currentPage, true);
     }
 
