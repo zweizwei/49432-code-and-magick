@@ -138,8 +138,7 @@
 
     loadReviews(function(loadedReviews) {
         reviews = loadedReviews;
-        renderReviews(reviews);
-        setActiveFilter(('reviews-all'));
+        setActiveFilter(localStorage.getItem('filterID') || 'reviews-all');
     });
 
     //РЅРѕ РµСЃР»Рё РѕРЅР° РіР»РѕР±Р°Р»СЊРЅР°СЏ Рё С„СѓРЅРєС†РёСЏ Р±С‹Р»Р° РІС‹Р·РІР°РЅР°, РїРѕС‡РµРјСѓ СЏ РЅРµ РјРѕРіСѓ Р·Р°РїСЂРѕСЃРёС‚СЊ РµРµ Р·РЅР°С‡РµРЅРёРµ С‚СѓС‚?
@@ -191,6 +190,7 @@
                 filteredReviews = reviews.slice(0);
                 break;
         }
+        localStorage.setItem('filterID', filterID);
         return filteredReviews;
     }
 

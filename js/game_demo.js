@@ -23,9 +23,7 @@
     }
 
     function startParallax() {
-
-            window.addEventListener('scroll', cloudsPosition);
-
+           window.addEventListener('scroll', cloudsPosition);
     }
 
     function cloudsPosition(){
