@@ -35,7 +35,8 @@
     var reviewsContainer = document.querySelector('.reviews-list');
 
     function renderReviews(reviewsToRender, pageNumber, replace){
-        var reviewsContainer = document.querySelector('.reviews-list');
+
+      var reviewsContainer = document.querySelector('.reviews-list');
 
         replace = typeof replace !== 'undefined' ? replace : true;
 
@@ -133,18 +134,16 @@
     }
 
 
-    //XHR записал данные в reviews - которая глобальная
+    //XHR Р·Р°РїРёСЃР°Р» РґР°РЅРЅС‹Рµ РІ reviews - РєРѕС‚РѕСЂР°СЏ РіР»РѕР±Р°Р»СЊРЅР°СЏ
 
     loadReviews(function(loadedReviews) {
         reviews = loadedReviews;
-
-        console.log(reviews);
         renderReviews(reviews);
+        setActiveFilter(('reviews-all'));
     });
 
-    //но если она глобальная и функция была вызвана, почему я не могу запросить ее значение тут?
+    //РЅРѕ РµСЃР»Рё РѕРЅР° РіР»РѕР±Р°Р»СЊРЅР°СЏ Рё С„СѓРЅРєС†РёСЏ Р±С‹Р»Р° РІС‹Р·РІР°РЅР°, РїРѕС‡РµРјСѓ СЏ РЅРµ РјРѕРіСѓ Р·Р°РїСЂРѕСЃРёС‚СЊ РµРµ Р·РЅР°С‡РµРЅРёРµ С‚СѓС‚?
 
-    console.log(reviews);
 
 
     function filterReviews(reviewsToFilter, filterID) {
@@ -204,18 +203,19 @@
     }
 
     function setActiveFilter(filterID) {
+        currentPage = 0;
         currentReviews = filterReviews(reviews, filterID);
-        console.log(currentReviews);
         renderReviews(currentReviews, currentPage, true);
+
     }
 
     var moreReviews = document.querySelector('.reviews-controls-more');
         console.log(moreReviews);
 
     moreReviews.addEventListener('click', function() {
-
         if (isNextPageAvailable()){
-            renderReviews(currentReviews, currentPage++, false);
+          renderReviews(currentReviews, currentPage++, false);
+
         }
     });
 
@@ -223,14 +223,7 @@
         return currentPage < Math.ceil(reviews.length / PAGE_SIZE);
     }
 
-
-
-
     initFilters();
-    setActiveFilter(('reviews-all'));
-
-    console.log(currentReviews);
-
 
 
 })();
