@@ -1,14 +1,16 @@
-(function () {
+'use strict';
+
+(function() {
   var formContainer = document.querySelector('.overlay-container');
   var formOpenButton = document.querySelector('.reviews-controls-new');
   var formCloseButton = document.querySelector('.review-form-close');
 
-  formOpenButton.onclick = function (evt) {
+  formOpenButton.onclick = function(evt) {
     evt.preventDefault();
     formContainer.classList.remove('invisible');
   };
 
-  formCloseButton.onclick = function (evt) {
+  formCloseButton.onclick = function(evt) {
     evt.preventDefault();
     formContainer.classList.add('invisible');
   };
@@ -54,7 +56,7 @@
   reviewName.onchange = validate;
   reviewText.onchange = validate;
 
-  formElement.onsubmit = function (evt) {
+  formElement.onsubmit = function(evt) {
     evt.preventDefault();
 
 
@@ -73,7 +75,7 @@
   };
 
 
-  var calculateDateExpire = function () {
+  var calculateDateExpire = function() {
     var dateCurrent = new Date();
     var dateBirthday = new Date(dateCurrent.getFullYear(), 9, 25);
     var dateBirthdayDelta = dateCurrent - dateBirthday;

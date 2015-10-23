@@ -1,8 +1,10 @@
 root: true
 
-globals: docCookies: true
+globals:
+  docCookies: true
 
-env: browser: true
+env:
+  browser: true
 
 extends: "eslint:recommended"
 

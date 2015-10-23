@@ -470,9 +470,3 @@ input[type=radio]:checked + .review-mark-label {
   top: -1.5em;
 }
 
-.review-load-failure {
-    background-image: url('../img/user-1.jpg');
-    background-size: 128px 128px;
-    background-repeat: no-repeat;
-    }
-
