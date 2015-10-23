@@ -30,8 +30,6 @@
   function renderReviews(reviewsToRender) {
 
 
-
-
     var reviewsContainer = document.querySelector('.reviews-list');
     reviewsContainer.innerHTML = '';
 

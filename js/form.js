@@ -1,14 +1,14 @@
-(function() {
+(function () {
   var formContainer = document.querySelector('.overlay-container');
   var formOpenButton = document.querySelector('.reviews-controls-new');
   var formCloseButton = document.querySelector('.review-form-close');
 
-  formOpenButton.onclick = function(evt) {
+  formOpenButton.onclick = function (evt) {
     evt.preventDefault();
     formContainer.classList.remove('invisible');
   };
 
-  formCloseButton.onclick = function(evt) {
+  formCloseButton.onclick = function (evt) {
     evt.preventDefault();
     formContainer.classList.add('invisible');
   };
@@ -16,76 +16,61 @@
 //validate function
 
   var formElement = document.querySelector('.review-form'),
-      reviewName = document.querySelector('.review-form-field-name'),
-      reviewText = document.querySelector('.review-form-field-text'),
-      reviewMark = document.querySelectorAll('[name=review-mark]');
-      reviewNameLenght = 0,
-      reviewTextLenght = 0,
+    reviewName = document.querySelector('.review-form-field-name'),
+    reviewText = document.querySelector('.review-form-field-text'),
+    reviewMark = document.querySelectorAll('[name=review-mark]'),
 
-      reviewFormControls = document.querySelector('.review-form-controls'),
-      reviewFieldslName = document.querySelector('.review-fields-name'),
-      reviewFieldsText = document.querySelector('.review-fields-text');
+    reviewFormControls = document.querySelector('.review-form-controls'),
+    reviewFieldslName = document.querySelector('.review-fields-name'),
+    reviewFieldsText = document.querySelector('.review-fields-text');
 
 
-  function validate(){
+  function validate() {
 
-    var reviewNameLenght = reviewName.value.length,
-        reviewTextLenght = reviewText.value.length;
+    var reviewNameLength = reviewName.value.length,
+      reviewTextLength = reviewText.value.length;
 
     reviewFormControls.classList.add('hide');
     reviewFieldslName.classList.add('hide');
     reviewFieldsText.classList.add('hide');
 
-    if (reviewNameLenght === 0 || reviewTextLenght === 0) {
+    if (reviewNameLength === 0 || reviewTextLength === 0) {
       reviewFormControls.classList.remove('hide');
-      if (reviewNameLenght === 0){
+      if (reviewNameLength === 0) {
         reviewFieldslName.classList.remove('hide');
       }
-      if  (reviewTextLenght === 0 ){
+      if (reviewTextLength === 0) {
         reviewFieldsText.classList.remove('hide');
       }
       return false;
 
-    }   else    {
-      console.log('validated');
+    } else {
+
       reviewFormControls.classList.add('hide');
-      return  true;
+      return true;
     }
   }
 
-  reviewName.onchange = function(){
-      validate();
-  }
-  reviewText.onchange = function () {
-      validate();
-  }
+  reviewName.onchange = validate;
+  reviewText.onchange = validate;
 
-  formElement.onsubmit = function(evt){
-      evt.preventDefault();
+  formElement.onsubmit = function (evt) {
+    evt.preventDefault();
 
 
-
-      var form = formElement,
-        reviewNameLenght = reviewName.value.length,
-        reviewTextLenght = reviewText.value.length;
-
-    if (validate() == true) {
-      console.log(validate());
+    if (validate()) {
       for (var i = 0; i < reviewMark.length; i++) {
         if (reviewMark[i].checked) {
           docCookies.removeItem('review-mark');
           docCookies.setItem('review-mark', reviewMark[i].value,
-              calculateDateExpire());
+            calculateDateExpire());
         }
       }
       docCookies.removeItem('review-name');
       docCookies.setItem('review-name', reviewName.value, calculateDateExpire());
       formElement.submit();
-    } else {
-        console.log(validate());
     }
   };
-
 
 
   var calculateDateExpire = function () {
@@ -98,9 +83,6 @@
     }
     return (new Date(+dateCurrent + +dateBirthdayDelta));
   };
-
-
-
 
 
 })();
