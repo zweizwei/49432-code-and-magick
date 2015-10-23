@@ -25,6 +25,7 @@
 
   var reviews;
   var currentReviews;
+  var reviewsSection = document.querySelector('reviews');
 
   var reviewsContainer = document.querySelector('.reviews-list');
 
@@ -86,6 +87,7 @@
 
       switch (loadedXhr.readyState) {
         case readyState.OPENED:
+          reviewsSection.classList.remove('invisible');
           reviewsContainer.classList.add('reviews-list-loading');
           break;
 
@@ -167,8 +169,6 @@
   function initFilters() {
     var filtersContainer = document.querySelector('.reviews-filter');
 
-    filtersContainer.classList.add('invisible');
-
     filtersContainer.addEventListener('click', function(evt) {
       var clickedFilter = evt.target;
       setActiveFilter(clickedFilter.id);
@@ -181,7 +181,6 @@
   }
 
   function showFailure() {
-    var reviewsSection = document.querySelector('reviews');
     reviewsSection.classList.add('reviews-load-failure');
   }
 
