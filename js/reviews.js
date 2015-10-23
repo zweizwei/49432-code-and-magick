@@ -170,6 +170,8 @@
   function initFilters() {
     var filtersContainer = document.querySelector('.reviews-filter');
 
+    filtersContainer.classList.add('invisible');
+
     filtersContainer.addEventListener('click', function (evt) {
       var clickedFilter = evt.target;
       setActiveFilter(clickedFilter.id);
