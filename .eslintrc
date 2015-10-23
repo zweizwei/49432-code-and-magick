@@ -1,13 +1,10 @@
 root: true
 
-globals:
-  docCookies: true
+globals: docCookies: true
 
-env:
-  browser: true
+env: browser: true
 
-extends:
-  "eslint:recommended"
+extends: "eslint:recommended"
 
 rules:
   indent: [2, 2, {SwitchCase: 1}]
@@ -80,12 +77,12 @@ rules:
   strict: [2, "global"]
   yoda: [2, "never"]
 
-  # Previously on by default in node environment
-  no-catch-shadow: 0
-  no-console: 0
-  no-mixed-requires: 2
-  no-new-require: 2
-  no-path-concat: 2
-  no-process-exit: 2
-  global-strict: [0, "always"]
-  handle-callback-err: [2, "err"]
+# Previously on by default in node environment
+no-catch-shadow: 0
+no-console: 0
+no-mixed-requires: 2
+no-new-require: 2
+no-path-concat: 2
+no-process-exit: 2
+global-strict: [0, "always"]
+handle-callback-err: [2, "err"]
