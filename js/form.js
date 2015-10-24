@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
   var formContainer = document.querySelector('.overlay-container');
   var formOpenButton = document.querySelector('.reviews-controls-new');
@@ -13,18 +15,14 @@
     formContainer.classList.add('invisible');
   };
 
-//validate function
-
   var formElement = document.querySelector('.review-form'),
     reviewName = document.querySelector('.review-form-field-name'),
     reviewText = document.querySelector('.review-form-field-text'),
-    reviewMark = document.querySelectorAll('[name=review-mark]');
-  reviewNameLenght = 0,
-      reviewTextLenght = 0,
+    reviewMark = document.querySelectorAll('[name=review-mark]'),
 
-      reviewFormControls = document.querySelector('.review-form-controls'),
-      reviewFieldslName = document.querySelector('.review-fields-name'),
-      reviewFieldsText = document.querySelector('.review-fields-text');
+    reviewFormControls = document.querySelector('.review-form-controls'),
+    reviewFieldslName = document.querySelector('.review-fields-name'),
+    reviewFieldsText = document.querySelector('.review-fields-text');
 
 
   function validate() {
@@ -41,35 +39,35 @@
       if (reviewNameLenght === 0) {
         reviewFieldslName.classList.remove('hide');
       }
-      if  (reviewTextLenght === 0 ) {
+      if (reviewTextLenght === 0) {
         reviewFieldsText.classList.remove('hide');
       }
       return false;
 
-    }   else    {
-      console.log('validated');
+    } else {
       reviewFormControls.classList.add('hide');
-      return  true;
     }
   }
 
-  reviewName.onchange = function() {
-    validate();
-  };
-  reviewText.onchange = function() {
-    validate();
-  };
+
+  function calculateDateExpire() {
+    var dateCurrent = new Date();
+    var dateBirthday = new Date(dateCurrent.getFullYear(), 9, 25);
+    var dateBirthdayDelta = dateCurrent - dateBirthday;
+    if (+dateBirthdayDelta < 0) {
+      dateBirthdayDelta = 31536000000 + dateBirthdayDelta;
+
+    }
+    return (new Date(+dateCurrent + +dateBirthdayDelta));
+  }
+
+  reviewName.onchange = validate;
+  reviewText.onchange = validate;
 
   formElement.onsubmit = function(evt) {
     evt.preventDefault();
 
-
-
-    var form = formElement,
-      reviewNameLenght = reviewName.value.length,
-      reviewTextLenght = reviewText.value.length;
-
-    if (validate() === true) {
+    if (validate) {
       console.log(validate());
       for (var i = 0; i < reviewMark.length; i++) {
         if (reviewMark[i].checked) {
@@ -84,19 +82,6 @@
     } else {
       console.log(validate());
     }
-  };
-
-
-
-  var calculateDateExpire = function() {
-    var dateCurrent = new Date();
-    var dateBirthday = new Date(dateCurrent.getFullYear(), 9, 25);
-    var dateBirthdayDelta = dateCurrent - dateBirthday;
-    if (+dateBirthdayDelta < 0) {
-      dateBirthdayDelta = 31536000000 + dateBirthdayDelta;
-
-    }
-    return (new Date(+dateCurrent + +dateBirthdayDelta));
   };
 
 
