@@ -11,6 +11,8 @@
     '8': 'review-rating-five'
   };
 
+  var PICTURE_SIDE_SIZE = 124;
+
 
   var Review = function(data) {
     this._data = data;
@@ -31,8 +33,8 @@
       authorPicture.addEventListener('load', function() {
         newReviewElement.replaceChild(authorPicture, newReviewElement.childNodes[1]);
         authorPicture.classList.add('review-author');
-        authorPicture.width = 124;
-        authorPicture.height = 124;
+        authorPicture.width = PICTURE_SIDE_SIZE;
+        authorPicture.height = PICTURE_SIDE_SIZE;
       });
 
 
