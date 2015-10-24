@@ -67,7 +67,7 @@
   formElement.onsubmit = function(evt) {
     evt.preventDefault();
 
-    if (validate) {
+    if (validate()) {
       for (var i = 0; i < reviewMark.length; i++) {
         if (reviewMark[i].checked) {
           docCookies.removeItem('review-mark');
