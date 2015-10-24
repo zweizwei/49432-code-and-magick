@@ -1,3 +1,4 @@
+
 'use strict';
 
 (function() {
@@ -37,21 +38,22 @@
       });
 
 
-      authorPicture.addEventListener('error', function(evt) {
+      authorPicture.addEventListener('error', function() {
         newReviewElement.classList.add('review-load-failure');
       });
 
       container.appendChild(newReviewElement);
 
-      this._element = newReviewElement;
+      this.element = newReviewElement;
     }
   };
 
   Review.prototype.unrender = function() {
-    this._element.parentNode.removeChild(this._element);
-    this._element = null;
+    this.element.parentNode.removeChild(this.element);
+    this.element = null;
   };
 
   window.Review = Review;
 
 })();
+
