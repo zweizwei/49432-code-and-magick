@@ -27,19 +27,19 @@
 
   function validate() {
 
-    var reviewNameLenght = reviewName.value.length,
-      reviewTextLenght = reviewText.value.length;
+    var reviewNameLength = reviewName.value.length,
+      reviewTextLength = reviewText.value.length;
 
     reviewFormControls.classList.add('hide');
     reviewFieldslName.classList.add('hide');
     reviewFieldsText.classList.add('hide');
 
-    if (reviewNameLenght === 0 || reviewTextLenght === 0) {
+    if (reviewNameLength === 0 || reviewTextLength === 0) {
       reviewFormControls.classList.remove('hide');
-      if (reviewNameLenght === 0) {
+      if (reviewNameLength === 0) {
         reviewFieldslName.classList.remove('hide');
       }
-      if (reviewTextLenght === 0) {
+      if (reviewTextLength === 0) {
         reviewFieldsText.classList.remove('hide');
       }
       return false;
@@ -68,19 +68,16 @@
     evt.preventDefault();
 
     if (validate) {
-      console.log(validate());
       for (var i = 0; i < reviewMark.length; i++) {
         if (reviewMark[i].checked) {
           docCookies.removeItem('review-mark');
           docCookies.setItem('review-mark', reviewMark[i].value,
-              calculateDateExpire());
+            calculateDateExpire());
         }
       }
       docCookies.removeItem('review-name');
       docCookies.setItem('review-name', reviewName.value, calculateDateExpire());
       formElement.submit();
-    } else {
-      console.log(validate());
     }
   };
 
