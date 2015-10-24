@@ -33,15 +33,11 @@
   var reviewsContainer = document.querySelector('.reviews-list');
 
   function renderReviews(reviewsToRender, pageNumber, replace) {
-    console.log('page to render is ' + pageNumber);
-
     replace = typeof replace !== 'undefined' ? replace : true;
 
     pageNumber = pageNumber || 0;
     var reviewsFrom = pageNumber * PAGE_SIZE;
     var reviewsTo = reviewsFrom + PAGE_SIZE;
-    console.log(reviewsFrom);
-    console.log(reviewsTo);
 
     reviewsToRender = reviewsToRender.slice(reviewsFrom, reviewsTo);
 
@@ -199,8 +195,7 @@
   var moreReviews = document.querySelector('.reviews-controls-more');
   moreReviews.addEventListener('click', function() {
     if (isNextPageAvailable()) {
-      console.log('i will now render next page, current page is ' + currentPage);
-      renderReviews(currentReviews, currentPage++, false);
+      renderReviews(currentReviews, ++currentPage, false);
     }
   });
 
