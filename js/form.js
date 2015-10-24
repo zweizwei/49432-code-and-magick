@@ -16,10 +16,10 @@
 //validate function
 
   var formElement = document.querySelector('.review-form'),
-      reviewName = document.querySelector('.review-form-field-name'),
-      reviewText = document.querySelector('.review-form-field-text'),
-      reviewMark = document.querySelectorAll('[name=review-mark]');
-      reviewNameLenght = 0,
+    reviewName = document.querySelector('.review-form-field-name'),
+    reviewText = document.querySelector('.review-form-field-text'),
+    reviewMark = document.querySelectorAll('[name=review-mark]');
+  reviewNameLenght = 0,
       reviewTextLenght = 0,
 
       reviewFormControls = document.querySelector('.review-form-controls'),
@@ -27,10 +27,10 @@
       reviewFieldsText = document.querySelector('.review-fields-text');
 
 
-  function validate(){
+  function validate() {
 
     var reviewNameLenght = reviewName.value.length,
-        reviewTextLenght = reviewText.value.length;
+      reviewTextLenght = reviewText.value.length;
 
     reviewFormControls.classList.add('hide');
     reviewFieldslName.classList.add('hide');
@@ -38,10 +38,10 @@
 
     if (reviewNameLenght === 0 || reviewTextLenght === 0) {
       reviewFormControls.classList.remove('hide');
-      if (reviewNameLenght === 0){
+      if (reviewNameLenght === 0) {
         reviewFieldslName.classList.remove('hide');
       }
-      if  (reviewTextLenght === 0 ){
+      if  (reviewTextLenght === 0 ) {
         reviewFieldsText.classList.remove('hide');
       }
       return false;
@@ -53,23 +53,23 @@
     }
   }
 
-  reviewName.onchange = function(){
-      validate();
-  }
-  reviewText.onchange = function () {
-      validate();
-  }
+  reviewName.onchange = function() {
+    validate();
+  };
+  reviewText.onchange = function() {
+    validate();
+  };
 
-  formElement.onsubmit = function(evt){
-      evt.preventDefault();
+  formElement.onsubmit = function(evt) {
+    evt.preventDefault();
 
 
 
-      var form = formElement,
-        reviewNameLenght = reviewName.value.length,
-        reviewTextLenght = reviewText.value.length;
+    var form = formElement,
+      reviewNameLenght = reviewName.value.length,
+      reviewTextLenght = reviewText.value.length;
 
-    if (validate() == true) {
+    if (validate() === true) {
       console.log(validate());
       for (var i = 0; i < reviewMark.length; i++) {
         if (reviewMark[i].checked) {
@@ -82,13 +82,13 @@
       docCookies.setItem('review-name', reviewName.value, calculateDateExpire());
       formElement.submit();
     } else {
-        console.log(validate());
+      console.log(validate());
     }
   };
 
 
 
-  var calculateDateExpire = function () {
+  var calculateDateExpire = function() {
     var dateCurrent = new Date();
     var dateBirthday = new Date(dateCurrent.getFullYear(), 9, 25);
     var dateBirthdayDelta = dateCurrent - dateBirthday;

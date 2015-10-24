@@ -1,63 +1,63 @@
-(function (){
+(function() {
 
-    var clouds = document.querySelector('.header-clouds');
-
-
-    function isContainerInTheWindow() {
-        return clouds.getBoundingClientRect().bottom > 0;
-    }
-
-    function turnCloudsParallaxOff() {
-        window.dispatchEvent(new CustomEvent('stopParallax'));
-    }
-
-    function showClouds() {
-        window.dispatchEvent(new CustomEvent('startParallax'));
-    }
+  var clouds = document.querySelector('.header-clouds');
 
 
-    function stopParallax() {
+  function isContainerInTheWindow() {
+    return clouds.getBoundingClientRect().bottom > 0;
+  }
 
-            window.removeEventListener('scroll', cloudsPosition);
+  function turnCloudsParallaxOff() {
+    window.dispatchEvent(new CustomEvent('stopParallax'));
+  }
 
-    }
-
-    function startParallax() {
-           window.addEventListener('scroll', cloudsPosition);
-    }
-
-    function cloudsPosition(){
-        clouds.style.backgroundPosition = "-" + scrollY/10 + '%' + '0%';
-    }
+  function showClouds() {
+    window.dispatchEvent(new CustomEvent('startParallax'));
+  }
 
 
-    function initScroll() {
+  function stopParallax() {
 
-        var scrollTimeout;
+    window.removeEventListener('scroll', cloudsPosition);
 
-        window.addEventListener('scroll', function () {
-            clearTimeout(scrollTimeout)
-            scrollTimeout = setTimeout(checkParallax, 100);
-        })
+  }
 
-        window.addEventListener('startParallax', startParallax);
-        window.addEventListener('stopParallax', stopParallax);
+  function startParallax() {
+    window.addEventListener('scroll', cloudsPosition);
+  }
 
-    }
-
-
-    function checkParallax() {
-
-        if (isContainerInTheWindow()) {
-            console.log('start showing clouds');
-            showClouds();
-        } else {
-            console.log('stop showing clouds');
-            turnCloudsParallaxOff();
-        }
-    }
+  function cloudsPosition() {
+    clouds.style.backgroundPosition = '-' + scrollY / 10 + '%' + '0%';
+  }
 
 
-    initScroll();
+  function initScroll() {
 
-    })();
+    var scrollTimeout;
+
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(checkParallax, 100);
+      });
+
+    window.addEventListener('startParallax', startParallax);
+    window.addEventListener('stopParallax', stopParallax);
+
+  }
+
+
+  function checkParallax() {
+
+    if (isContainerInTheWindow()) {
+        console.log('start showing clouds');
+        showClouds();
+      } else {
+        console.log('stop showing clouds');
+        turnCloudsParallaxOff();
+      }
+  }
+
+
+  initScroll();
+
+})();
