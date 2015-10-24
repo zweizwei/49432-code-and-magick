@@ -183,8 +183,9 @@
   function showFailure() {
     reviewsSection.classList.add('reviews-load-failure');
   }
-
   initFilters();
+  setActiveFilter(('reviews-all'));
 
 
-})();
+
+} )();
