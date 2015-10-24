@@ -44,7 +44,7 @@
 
 
     if (typeof reviewsToRender === 'object') {
-      reviewsToRender.forEach(function(reviewData, i) {
+      reviewsToRender.forEach(function(reviewData) {
         var newReviewElement = new Review(reviewData);
         newReviewElement.render(reviewsFragment);
         renderedReviews.push(newReviewElement);
