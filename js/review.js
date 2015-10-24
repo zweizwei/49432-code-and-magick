@@ -13,7 +13,7 @@
 
 
   var Review = function(data) {
-    this.data = data;
+    this._data = data;
     this.element = null;
   };
 
@@ -21,12 +21,12 @@
     var reviewTemplate = document.getElementById('review-template');
     var newReviewElement = reviewTemplate.content.children[0].cloneNode(true);
 
-    newReviewElement.querySelector('.review-rating').classList.add(ratingClassName[this.data.rating]);
-    newReviewElement.querySelector('.review-text').textContent = this.data.description;
+    newReviewElement.querySelector('.review-rating').classList.add(ratingClassName[this._data.rating]);
+    newReviewElement.querySelector('.review-text').textContent = this._data.description;
 
-    if (this.data.author.picture) {
+    if (this._data.author.picture) {
       var authorPicture = new Image();
-      authorPicture.src = this.data.author.picture;
+      authorPicture.src = this._data.author.picture;
 
       authorPicture.addEventListener('load', function() {
         newReviewElement.replaceChild(authorPicture, newReviewElement.childNodes[1]);
