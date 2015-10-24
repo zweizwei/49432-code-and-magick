@@ -10,10 +10,6 @@
     font-style: normal;
     }
 
-.hide {
-    display: none;
-    }
-
 html,
 body {
     margin: 0;
@@ -232,24 +228,11 @@ input[type=radio]:checked + .reviews-filter-item {
     width: 30px;
     }
 
-.review-rating-one {
-    }
-
-.review-rating-two {
-    width: 60px;
-    }
-
-.review-rating-three {
-    width: 90px;
-    }
-
-.review-rating-four {
-    width: 120px;
-    }
-
-.review-rating-five {
-    width: 150px;
-    }
+.review-rating-one {  }
+.review-rating-two { width: 60px; }
+.review-rating-three { width: 90px; }
+.review-rating-four { width: 120px; }
+.review-rating-five { width: 150px; }
 
 .review-author {
     border-radius: 50%;
@@ -321,15 +304,15 @@ footer p {
 
 .overlay-container,
 .overlay-gallery {
-  background: rgba(0, 0, 0, 0.8);
-  bottom: 0;
-  left: 0;
-  overflow: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 1;
-}
+    background: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    }
 
 .review-form {
     margin: 100px auto;
@@ -400,7 +383,6 @@ input[type=radio]:checked + .review-mark-label {
 
 .review-form-controls {
     white-space: nowrap;
-    display: inline-block;
     }
 
 .review-form-control {
@@ -409,7 +391,6 @@ input[type=radio]:checked + .review-mark-label {
     }
 
 .review-submit {
-    display: inline-block;
     background: #fff;
     border: 0;
     font: bold 20px 'PT Mono';
@@ -419,7 +400,6 @@ input[type=radio]:checked + .review-mark-label {
     }
 
 .review-fields {
-    display: inline-block;
     color: #fff;
     color: rgba(255, 255, 255, 0.6);
     font-size: 16px;
@@ -432,41 +412,40 @@ input[type=radio]:checked + .review-mark-label {
     }
 
 .overlay-gallery {
-  text-align: center;
-}
+    text-align: center;
+    }
 
 .overlay-gallery-controls {
-  margin: 100px 0;
-}
+    margin: 100px 0;
+    }
 
 .overlay-gallery-control {
-  background: url('../img/arrows-sprite.png') no-repeat;
-  cursor: pointer;
-  display: inline-block;
-  height: 46px;
-  vertical-align: middle;
-  width: 30px;
-}
+    background: url('../img/arrows-sprite.png') no-repeat;
+    cursor: pointer;
+    display: inline-block;
+    height: 46px;
+    vertical-align: middle;
+    width: 30px;
+    }
 
 .overlay-gallery-control-right {
-  background-position: -30px 0;
-}
+    background-position: -30px 0;
+    }
 
 .overlay-gallery-preview {
-  border: dotted 1px rgba(255, 255, 255, 0.2);
-  display: inline-block;
-  min-height: 300px;
-  min-width: 300px;
-  position: relative;
-  vertical-align: middle;
-}
+    border: dotted 1px rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    min-height: 300px;
+    min-width: 300px;
+    position: relative;
+    vertical-align: middle;
+    }
 
 .overlay-gallery-preview-number {
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  left: 0;
-  position: absolute;
-  top: -1.5em;
-}
-
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    left: 0;
+    position: absolute;
+    top: -1.5em;
+    }

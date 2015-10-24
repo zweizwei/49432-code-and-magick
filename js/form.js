@@ -15,8 +15,6 @@
     formContainer.classList.add('invisible');
   };
 
-//validate function
-
   var formElement = document.querySelector('.review-form'),
     reviewName = document.querySelector('.review-form-field-name'),
     reviewText = document.querySelector('.review-form-field-text'),
@@ -29,53 +27,30 @@
 
   function validate() {
 
-    var reviewNameLength = reviewName.value.length,
-      reviewTextLength = reviewText.value.length;
+    var reviewNameLenght = reviewName.value.length,
+      reviewTextLenght = reviewText.value.length;
 
     reviewFormControls.classList.add('hide');
     reviewFieldslName.classList.add('hide');
     reviewFieldsText.classList.add('hide');
 
-    if (reviewNameLength === 0 || reviewTextLength === 0) {
+    if (reviewNameLenght === 0 || reviewTextLenght === 0) {
       reviewFormControls.classList.remove('hide');
-      if (reviewNameLength === 0) {
+      if (reviewNameLenght === 0) {
         reviewFieldslName.classList.remove('hide');
       }
-      if (reviewTextLength === 0) {
+      if (reviewTextLenght === 0) {
         reviewFieldsText.classList.remove('hide');
       }
       return false;
 
     } else {
-
       reviewFormControls.classList.add('hide');
-      return true;
     }
   }
 
-  reviewName.onchange = validate;
-  reviewText.onchange = validate;
 
-  formElement.onsubmit = function(evt) {
-    evt.preventDefault();
-
-
-    if (validate()) {
-      for (var i = 0; i < reviewMark.length; i++) {
-        if (reviewMark[i].checked) {
-          docCookies.removeItem('review-mark');
-          docCookies.setItem('review-mark', reviewMark[i].value,
-            calculateDateExpire());
-        }
-      }
-      docCookies.removeItem('review-name');
-      docCookies.setItem('review-name', reviewName.value, calculateDateExpire());
-      formElement.submit();
-    }
-  };
-
-
-  var calculateDateExpire = function() {
+  function calculateDateExpire() {
     var dateCurrent = new Date();
     var dateBirthday = new Date(dateCurrent.getFullYear(), 9, 25);
     var dateBirthdayDelta = dateCurrent - dateBirthday;
@@ -84,7 +59,33 @@
 
     }
     return (new Date(+dateCurrent + +dateBirthdayDelta));
+  }
+
+  reviewName.onchange = validate;
+  reviewText.onchange = validate;
+
+  formElement.onsubmit = function(evt) {
+    evt.preventDefault();
+
+    if (validate) {
+      console.log(validate());
+      for (var i = 0; i < reviewMark.length; i++) {
+        if (reviewMark[i].checked) {
+          docCookies.removeItem('review-mark');
+          docCookies.setItem('review-mark', reviewMark[i].value,
+              calculateDateExpire());
+        }
+      }
+      docCookies.removeItem('review-name');
+      docCookies.setItem('review-name', reviewName.value, calculateDateExpire());
+      formElement.submit();
+    } else {
+      console.log(validate());
+    }
   };
+
+
+
 
 
 })();
