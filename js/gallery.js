@@ -18,9 +18,9 @@
 
   var Gallery = function() {
     this._element = document.querySelector('.overlay-gallery');
-    this._closeButton = document.querySelector('.overlay-gallery-close');
-    this._leftButton = document.querySelector('.overlay-gallery-control-left');
-    this._rightButton = document.querySelector('.overlay-gallery-control-right');
+    this._closeButton = this._element.querySelector('.overlay-gallery-close');
+    this._leftButton = this._element.querySelector('.overlay-gallery-control-left');
+    this._rightButton = this._element.querySelector('.overlay-gallery-control-right');
     this._pictureElement = this._element.querySelector('.overlay-gallery-preview');
 
     this._photos = [];
@@ -49,7 +49,6 @@
     this._rightButton.removeEventListener('click', this._onRightArrowClick);
     document.body.removeEventListener('keyDown', this._onDocumentKeyDown);
 
-    this._photos = [];
     this._currentPhoto = 0;
   };
 
@@ -114,7 +113,7 @@
   };
 
   galleryContainer.addEventListener('click', function(evt) {
-    if (evt.target.parentNode.classList.contains('photogallery-image')) {
+    if (typeof gallery !== 'object' && evt.target.parentNode.classList.contains('photogallery-image')) {
       var gallery = new Gallery();
       var currentImage = evt.target.src;
       gallery.setPhotos();
