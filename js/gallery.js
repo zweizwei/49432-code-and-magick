@@ -1,3 +1,5 @@
+/* global Gallery: true */
+
 'use strict';
 
 (function() {
@@ -8,51 +10,118 @@
     'ESC': 27
   };
 
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
   var galleryContainer = document.querySelector('.photogallery');
-  var galleryElement = document.querySelector('.overlay-gallery');
-  var galleryClose = document.querySelector('.overlay-gallery-close');
 
+  var Gallery = function() {
+    this._element = document.querySelector('.overlay-gallery');
+    this._closeButton = document.querySelector('.overlay-gallery-close');
+    this._leftButton = document.querySelector('.overlay-gallery-control-left');
+    this._rightButton = document.querySelector('.overlay-gallery-control-right');
+    this._pictureElement = this._element.querySelector('.overlay-gallery-preview');
 
-  function keyHandler(evt) {
+    this._photos = [];
+    this._currentPhoto = 0;
+
+    this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
+    this._onLeftArrowClick = this._onLeftArrowClick.bind(this);
+    this._onRightArrowClick = this._onRightArrowClick.bind(this);
+    this._onDocumentKeyDown = this._onDocumentKeyDown.bind(this);
+  };
+
+  Gallery.prototype.show = function(src) {
+    this._element.classList.remove('invisible');
+    this._closeButton.addEventListener('click', this._onCloseButtonClick);
+    this._leftButton.addEventListener('click', this._onLeftArrowClick);
+    this._rightButton.addEventListener('click', this._onRightArrowClick);
+    document.body.addEventListener('keydown', this._onDocumentKeyDown);
+
+    this.setCurrentPhoto(this._photos.indexOf(src));
+  };
+
+  Gallery.prototype.hide = function() {
+    this._element.classList.add('invisible');
+    this._closeButton.removeEventListener('click', this._onCloseButtonClick);
+    this._leftButton.removeEventListener('click', this._onLeftArrowClick);
+    this._rightButton.removeEventListener('click', this._onRightArrowClick);
+    document.body.removeEventListener('keyDown', this._onDocumentKeyDown);
+
+    this._photos = [];
+    this._currentPhoto = 0;
+  };
+
+  Gallery.prototype.setPhotos = function() {
+    var images = document.querySelectorAll('.photogallery-image img');
+
+    for (var i = 0; i < images.length; i++) {
+      this._photos.push(images[i].src);
+    }
+  };
+
+  Gallery.prototype._onCloseButtonClick = function(evt) {
+    evt.preventDefault();
+    this.hide();
+  };
+
+  Gallery.prototype._onLeftArrowClick = function(evt) {
+    evt.preventDefault();
+    this.setCurrentPhoto(this._currentPhoto - 1);
+  };
+
+  Gallery.prototype._onRightArrowClick = function(evt) {
+    evt.preventDefault();
+    this.setCurrentPhoto(this._currentPhoto + 1);
+  };
+
+  Gallery.prototype._onDocumentKeyDown = function(evt) {
     switch (evt.keyCode) {
       case key.LEFT :
-        console.log('left');
+        this.setCurrentPhoto(this._currentPhoto - 1);
         break;
       case key.RIGHT :
-        console.log('right');
+        this.setCurrentPhoto(this._currentPhoto + 1);
         break;
       case key.ESC :
-        hideGallery();
-        break;
-      default:
+        this.hide();
         break;
     }
-  }
+  };
 
-  function closeButton(evt) {
-    evt.preventDefault();
-    hideGallery();
-  }
+  Gallery.prototype.setCurrentPhoto = function(index) {
 
-  function hideGallery() {
-    galleryElement.classList.add('invisible');
-    galleryClose.removeEventListener('click', closeButton);
-    document.body.removeEventListener('keydown', keyHandler);
-  }
 
-  function showGallery() {
-    galleryElement.classList.remove('invisible');
-    galleryClose.addEventListener('click', closeButton);
-    document.body.addEventListener('keydown', keyHandler);
-  }
+    index = clamp(index, 0, this._photos.length - 1);
 
+    this._currentPhoto = index;
+    var previewNumberContainer = this._pictureElement.children[0].cloneNode(true);
+    var numberCurrent = previewNumberContainer.querySelector('.preview-number-current');
+    var numberTotal = previewNumberContainer.querySelector('.preview-number-total');
+    numberCurrent.textContent = this._currentPhoto + 1;
+    numberTotal.textContent = this._photos.length;
+
+    this._pictureElement.innerHTML = '';
+
+    var imageElement = new Image();
+    imageElement.src = this._photos[this._currentPhoto];
+    imageElement.onload = function() {
+      this._pictureElement.appendChild(previewNumberContainer);
+      this._pictureElement.appendChild(imageElement);
+    }.bind(this);
+
+  };
 
   galleryContainer.addEventListener('click', function(evt) {
-    evt.preventDefault();
-
     if (evt.target.parentNode.classList.contains('photogallery-image')) {
-      showGallery();
+      var gallery = new Gallery();
+      var currentImage = evt.target.src;
+      gallery.setPhotos();
+      gallery.show(currentImage);
     }
   });
+
+  window.Gallery = Gallery;
 
 })();
