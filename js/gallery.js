@@ -10,11 +10,11 @@
     'ESC': 27
   };
 
+  var galleryContainer = document.querySelector('.photogallery');
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
   }
 
-  var galleryContainer = document.querySelector('.photogallery');
 
   var Gallery = function() {
     this._element = document.querySelector('.overlay-gallery');
@@ -112,14 +112,23 @@
 
   };
 
-  galleryContainer.addEventListener('click', function(evt) {
-    if (typeof gallery !== 'object' && evt.target.parentNode.classList.contains('photogallery-image')) {
-      var gallery = new Gallery();
-      var currentImage = evt.target.src;
-      gallery.setPhotos();
-      gallery.show(currentImage);
-    }
-  });
+  var gallery;
+
+  function initGallery() {
+    galleryContainer.addEventListener('click', function(evt) {
+      if (typeof gallery !== 'object') {
+        gallery = new Gallery();
+        console.log('hi from gallery here');
+      }
+      if (evt.target.parentNode.classList.contains('photogallery-image')) {
+        var currentImage = evt.target.src;
+        gallery.setPhotos();
+        gallery.show(currentImage);
+      }
+    });
+  }
+
+  initGallery();
 
   window.Gallery = Gallery;
 
