@@ -3,6 +3,7 @@ root: true
 globals:
   docCookies: true
   Review: true
+  Gallery: true
 
 env:
   browser: true

@@ -21,9 +21,7 @@
   }
 
   function stopParallax() {
-
     window.removeEventListener('scroll', cloudsPosition);
-
   }
 
   function startParallax() {
@@ -33,10 +31,8 @@
   function checkParallax() {
 
     if (isContainerInTheWindow()) {
-      console.log('start showing clouds');
       showClouds();
     } else {
-      console.log('stop showing clouds');
       turnCloudsParallaxOff();
     }
   }
@@ -54,7 +50,6 @@
     window.addEventListener('stopParallax', stopParallax);
 
   }
-
 
   initScroll();
 
