@@ -175,4 +175,28 @@
   });
   initFilters();
 
+  var galleryContainer = document.querySelector('.photogallery');
+  var gallery;
+
+  function initGallery() {
+    galleryContainer.addEventListener('click', function (evt) {
+      if (evt.target.parentNode.classList.contains('photogallery-image')) {
+        var currentImage = evt.target.src;
+        if (!gallery) {
+          gallery = new Gallery();
+          var images = document.querySelectorAll('.photogallery-image img');
+          var photos = [];
+          for (var i = 0; i < images.length; i++) {
+            photos.push(images[i].src);
+          }
+          gallery.setPhotos(photos);
+        }
+        gallery.show(currentImage);
+      }
+    });
+  }
+
+  initGallery();
+
+
 })();

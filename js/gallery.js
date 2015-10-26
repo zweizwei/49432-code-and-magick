@@ -10,7 +10,7 @@
     'ESC': 27
   };
 
-  var galleryContainer = document.querySelector('.photogallery');
+
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
   }
@@ -52,12 +52,8 @@
     this._currentPhoto = 0;
   };
 
-  Gallery.prototype.setPhotos = function() {
-    var images = document.querySelectorAll('.photogallery-image img');
-
-    for (var i = 0; i < images.length; i++) {
-      this._photos.push(images[i].src);
-    }
+  Gallery.prototype.setPhotos = function(photos) {
+    this._photos = photos;
   };
 
   Gallery.prototype._onCloseButtonClick = function(evt) {
@@ -112,23 +108,6 @@
 
   };
 
-  var gallery;
-
-  function initGallery() {
-    galleryContainer.addEventListener('click', function(evt) {
-      if (typeof gallery !== 'object') {
-        gallery = new Gallery();
-        console.log('hi from gallery here');
-      }
-      if (evt.target.parentNode.classList.contains('photogallery-image')) {
-        var currentImage = evt.target.src;
-        gallery.setPhotos();
-        gallery.show(currentImage);
-      }
-    });
-  }
-
-  initGallery();
 
   window.Gallery = Gallery;
 
