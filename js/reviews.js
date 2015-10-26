@@ -179,7 +179,7 @@
   var gallery;
 
   function initGallery() {
-    galleryContainer.addEventListener('click', function (evt) {
+    galleryContainer.addEventListener('click', function(evt) {
       if (evt.target.parentNode.classList.contains('photogallery-image')) {
         var currentImage = evt.target.src;
         if (!gallery) {
@@ -197,6 +197,5 @@
   }
 
   initGallery();
-
 
 })();
