@@ -184,6 +184,19 @@
   };
 
   /**
+   * перечень соответствий состояний игры и сообщений для этих состояний
+   * @enum {number}
+   */
+
+  var Message = {
+    'CONTINUE': ['go ahead'],
+    'WIN': ['roses are red', 'violets are blue', 'all my base', 'are belong', 'to you'],
+    'FAIL': ['the princess is in another castle'],
+    'PAUSE': ['espere', 'por favor'],
+    'INTRO': ['welcome']
+  };
+
+  /**
    * Правила завершения уровня. Ключами служат ID уровней, значениями функции
    * принимающие на вход состояние уровня и возвращающие true, если раунд
    * можно завершать или false если нет.
@@ -374,11 +387,29 @@
     },
 
     /**
-     * делает rect с мессаджем.
+     * делает rect message.
      */
 
-    _drawMessage: function(){
-      console.log('teh message will be drawn here!');
+    _drawText: function(message) {
+      var that = this.ctx;
+      this.ctx.globalCompositeOperation = 'overlay';
+      this.ctx.font = '16px PT Mono';
+
+      var lineHeight = 20;
+      var y = 130;
+
+      for (var i = 0; i < message.length; i++) {
+        that.fillText(message[i], 320, y);
+        y += lineHeight;
+      }
+
+      this.ctx.fillStyle = '#fff';
+      this.ctx.fillRect(300, 100, 250, 150);
+
+      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+      this.ctx.fillRect(310, 110, 250, 150);
+
+
     },
 
     /**
@@ -387,18 +418,16 @@
     _drawPauseScreen: function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          console.log(this);
-          console.log('you have won!');
+          this._drawText(Message.WIN);
           break;
         case Verdict.FAIL:
-          console.log('you have failed!');
+          this._drawText(Message.FAIL);
           break;
         case Verdict.PAUSE:
-          console.log('game is on pause!');
+          this._drawText(Message.PAUSE);
           break;
         case Verdict.INTRO:
-          this._drawMessage();
-          console.log('welcome to the game! Press Space to start');
+          this._drawText(Message.INTRO);
           break;
       }
     },
@@ -510,8 +539,8 @@
            */
           function checkDeath(state) {
             var me = state.objects.filter(function(object) {
-              return object.type === ObjectType.ME;
-            })[0];
+                return object.type === ObjectType.ME;
+              })[0];
 
             return me.state === ObjectState.DISPOSED ? Verdict.FAIL : Verdict.CONTINUE;
           },
@@ -532,8 +561,8 @@
            */
           function checkTime(state) {
             return Date.now() - state.startTime > 3 * 60 * 1000 ?
-                Verdict.FAIL :
-                Verdict.CONTINUE;
+              Verdict.FAIL :
+              Verdict.CONTINUE;
           }
         ];
       }
@@ -581,8 +610,8 @@
         if (object.sprite) {
           var image = new Image(object.width, object.height);
           image.src = (object.spriteReversed && object.direction & Direction.LEFT) ?
-              object.spriteReversed :
-              object.sprite;
+            object.spriteReversed :
+            object.sprite;
           this.ctx.drawImage(image, object.x, object.y, object.width, object.height);
         }
       }, this);
@@ -671,11 +700,13 @@
     }
   };
 
+  var game = new Game(document.querySelector('.demo'));
+
+  game.initializeLevelAndStart();
+  game.setGameStatus(Verdict.INTRO);
 
   window.Game = Game;
   window.Game.Verdict = Verdict;
 
-  var game = new Game(document.querySelector('.demo'));
-  game.initializeLevelAndStart();
-  game.setGameStatus(Verdict.INTRO);
+
 })();
