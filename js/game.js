@@ -374,11 +374,20 @@
     },
 
     /**
+     * делает rect с мессаджем.
+     */
+
+    _drawMessage: function(){
+      console.log('teh message will be drawn here!');
+    },
+
+    /**
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
+          console.log(this);
           console.log('you have won!');
           break;
         case Verdict.FAIL:
@@ -388,6 +397,7 @@
           console.log('game is on pause!');
           break;
         case Verdict.INTRO:
+          this._drawMessage();
           console.log('welcome to the game! Press Space to start');
           break;
       }
