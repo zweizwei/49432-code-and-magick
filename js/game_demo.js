@@ -3,10 +3,11 @@
 (function() {
 
   var clouds = document.querySelector('.header-clouds');
+  var gameRect = document.querySelector('.demo');
 
 
-  function isContainerInTheWindow() {
-    return clouds.getBoundingClientRect().bottom > 0;
+  function isContainerInTheWindow(container) {
+    return container.getBoundingClientRect().bottom > 0;
   }
 
   function turnCloudsParallaxOff() {
@@ -16,6 +17,16 @@
   function showClouds() {
     window.dispatchEvent(new CustomEvent('startParallax'));
   }
+
+  function stopGame() {
+    window.dispatchEvent(new CustomEvent('stopGame'));
+  }
+
+  function startGame() {
+    window.dispatchEvent(new CustomEvent('startGame'));
+  }
+
+
   function cloudsPosition() {
     clouds.style.backgroundPosition = '-' + scrollY / 10 + '%' + '0%';
   }
@@ -30,14 +41,26 @@
 
   function checkParallax() {
 
-    if (isContainerInTheWindow()) {
+    if (isContainerInTheWindow(clouds)) {
       showClouds();
     } else {
       turnCloudsParallaxOff();
     }
+
+    if (isContainerInTheWindow(gameRect)) {
+      startGame();
+    } else {
+      stopGame();
+    }
   }
 
-  function initScroll() {
+  function init() {
+
+    var game = new Game(document.querySelector('.demo'));
+
+    game.initializeLevelAndStart();
+    game.setGameStatus(Game.Verdict.INTRO);
+
 
     var scrollTimeout;
 
@@ -46,11 +69,27 @@
       scrollTimeout = setTimeout(checkParallax, 100);
     });
 
-    window.addEventListener('startParallax', startParallax);
-    window.addEventListener('stopParallax', stopParallax);
+    window.addEventListener('startParallax', function() {
+      startParallax();
+
+    });
+
+
+    window.addEventListener('stopParallax', function() {
+      stopParallax();
+    });
+
+    window.addEventListener('startGame', function() {
+      game.setGameStatus(Game.Verdict.CONTINUE);
+    });
+
+    window.addEventListener('stopGame', function() {
+      game.setGameStatus(Game.Verdict.PAUSE);
+    });
 
   }
 
-  initScroll();
+  init();
+
 
 })();

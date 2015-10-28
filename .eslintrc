@@ -1,8 +1,12 @@
-root: true
+root:
+  true
 
 globals:
   Backbone: true
   docCookies: true
+  Gallery: true
+  Review: true
+  Game: true
 
 env:
   browser: true
