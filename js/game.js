@@ -191,7 +191,7 @@
   var Message = {
     'CONTINUE': ['go ahead'],
     'WIN': ['roses are red', 'violets are blue', 'all my base', 'are belong', 'to you'],
-    'FAIL': ['the princess is in another castle'],
+    'FAIL': ['the princess', 'is in another', 'castle'],
     'PAUSE': ['espere', 'por favor'],
     'INTRO': ['welcome']
   };
