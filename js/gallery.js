@@ -108,7 +108,6 @@
 
   };
 
-
   window.Gallery = Gallery;
 
 })();

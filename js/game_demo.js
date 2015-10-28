@@ -74,15 +74,22 @@
     });
 
     window.addEventListener('startGame', function() {
-      console.log('i start game');
+      game.setGameStatus(Game.Verdict.CONTINUE);
+      console.log(game.state.currentStatus);
     });
 
     window.addEventListener('stopGame', function() {
-      console.log('i stop game');
+      game.setGameStatus(Game.Verdict.PAUSE);
+      console.log(game.state.currentStatus);
     });
 
   }
 
   initScroll();
+
+  var game = new Game(document.querySelector('.demo'));
+
+  game.initializeLevelAndStart();
+  game.setGameStatus(Game.Verdict.INTRO);
 
 })();

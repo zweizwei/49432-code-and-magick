@@ -700,10 +700,6 @@
     }
   };
 
-  var game = new Game(document.querySelector('.demo'));
-
-  game.initializeLevelAndStart();
-  game.setGameStatus(Verdict.INTRO);
 
   window.Game = Game;
   window.Game.Verdict = Verdict;
