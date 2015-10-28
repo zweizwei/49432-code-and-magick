@@ -1,12 +1,11 @@
-root:
-  true
+root: true
 
 globals:
   Backbone: true
   docCookies: true
-  Gallery: true
-  Review: true
-  Game: true
+  _: true
+  define: true
+  requirejs: true
 
 env:
   browser: true
