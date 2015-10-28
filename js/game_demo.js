@@ -54,7 +54,13 @@
     }
   }
 
-  function initScroll() {
+  function init() {
+
+    var game = new Game(document.querySelector('.demo'));
+
+    game.initializeLevelAndStart();
+    game.setGameStatus(Game.Verdict.INTRO);
+
 
     var scrollTimeout;
 
@@ -75,21 +81,15 @@
 
     window.addEventListener('startGame', function() {
       game.setGameStatus(Game.Verdict.CONTINUE);
-      console.log(game.state.currentStatus);
     });
 
     window.addEventListener('stopGame', function() {
       game.setGameStatus(Game.Verdict.PAUSE);
-      console.log(game.state.currentStatus);
     });
 
   }
 
-  initScroll();
+  init();
 
-  var game = new Game(document.querySelector('.demo'));
-
-  game.initializeLevelAndStart();
-  game.setGameStatus(Game.Verdict.INTRO);
 
 })();
