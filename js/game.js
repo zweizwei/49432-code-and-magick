@@ -519,7 +519,7 @@
     /**
      * Проверка статуса текущего уровня.
      */
-    checkStatus: function() {
+    checkStatus: function () {
       // Нет нужны запускать проверку, нужно ли останавливать уровень, если
       // заранее известно, что да.
       if (this.state.currentStatus !== Verdict.CONTINUE) {
@@ -537,10 +537,10 @@
            * @param {Object} state
            * @return {Verdict}
            */
-          function checkDeath(state) {
-            var me = state.objects.filter(function(object) {
-                return object.type === ObjectType.ME;
-              })[0];
+            function checkDeath(state) {
+            var me = state.objects.filter(function (object) {
+              return object.type === ObjectType.ME;
+            })[0];
 
             return me.state === ObjectState.DISPOSED ? Verdict.FAIL : Verdict.CONTINUE;
           },
@@ -550,7 +550,7 @@
            * @param {Object} state
            * @return {Verdict}
            */
-          function checkKeys(state) {
+            function checkKeys(state) {
             return state.keysPressed.ESC ? Verdict.PAUSE : Verdict.CONTINUE;
           },
 
@@ -559,7 +559,7 @@
            * @param {Object} state
            * @return {Verdict}
            */
-          function checkTime(state) {
+            function checkTime(state) {
             return Date.now() - state.startTime > 3 * 60 * 1000 ?
               Verdict.FAIL :
               Verdict.CONTINUE;
