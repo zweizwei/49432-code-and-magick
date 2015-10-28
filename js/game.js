@@ -538,8 +538,8 @@
            */
           function checkDeath(state) {
             var me = state.objects.filter(function(object) {
-                return object.type === ObjectType.ME;
-              })[0];
+              return object.type === ObjectType.ME;
+            })[0];
 
             return me.state === ObjectState.DISPOSED ? Verdict.FAIL : Verdict.CONTINUE;
           },
