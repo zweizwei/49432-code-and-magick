@@ -2,7 +2,7 @@
 
 'use strict';
 
-(function() {
+define(function() {
 
   var key = {
     'LEFT': 37,
@@ -108,6 +108,6 @@
 
   };
 
-  window.Gallery = Gallery;
+  return Gallery;
 
-})();
+});

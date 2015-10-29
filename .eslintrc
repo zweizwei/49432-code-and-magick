@@ -5,7 +5,8 @@ globals:
   docCookies: true
   Gallery: true
   Review: true
-  Review: true
+  Game: true
+  requirejs: true
 
 
   _: true

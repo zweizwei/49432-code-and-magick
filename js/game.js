@@ -1,6 +1,5 @@
 'use strict';
-
-(function() {
+define(function() {
   /**
    * @const
    * @type {number}
@@ -700,8 +699,7 @@
   };
 
 
-  window.Game = Game;
-  window.Game.Verdict = Verdict;
+  return Game;
+  //return Game.Verdict;
 
-
-})();
+});

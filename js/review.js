@@ -1,7 +1,7 @@
 
 'use strict';
 
-(function() {
+define(function() {
 
   var ratingClassName = {
     '4': 'review-rating-one',
@@ -53,7 +53,7 @@
     this.element = null;
   };
 
-  window.Review = Review;
+  return Review;
 
-})();
+});
 

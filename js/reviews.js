@@ -5,7 +5,10 @@
 
 'use strict';
 
-(function() {
+define([
+  'review',
+  'gallery'
+], function(Review, Gallery) {
 
   var readyState = {
     'UNSENT': 0,
@@ -216,6 +219,4 @@
 
   initGallery();
 
-
-
-})();
+});

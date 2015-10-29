@@ -2,7 +2,9 @@
 
 'use strict';
 
-(function() {
+define([
+  'game'
+], function(Game) {
 
   var clouds = document.querySelector('.header-clouds');
   var gameRect = document.querySelector('.demo');
@@ -94,4 +96,4 @@
   init();
 
 
-})();
+});
