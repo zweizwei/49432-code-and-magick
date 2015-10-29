@@ -3,6 +3,10 @@ root: true
 globals:
   Backbone: true
   docCookies: true
+  Gallery: true
+  Review: true
+  Review: true
+
 
   _: true
   define: true
