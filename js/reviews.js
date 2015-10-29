@@ -1,6 +1,8 @@
 /**
  * Created by zweizwei on 27/09/15.
  */
+/* global Review: true Gallery: true */
+
 'use strict';
 
 (function() {

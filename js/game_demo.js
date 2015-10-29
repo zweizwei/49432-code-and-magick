@@ -1,3 +1,5 @@
+/* global Game: true */
+
 'use strict';
 
 (function() {
