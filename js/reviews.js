@@ -153,7 +153,6 @@
     var filtersContainer = document.querySelector('.reviews-filter');
     filtersContainer.addEventListener('click', function(evt) {
       var clickedFilter = evt.target;
-      console.log(clickedFilter);
       location.hash = 'filters/' + clickedFilter.id;
     });
   }
@@ -170,13 +169,11 @@
   });
 
   function parseUrl() {
-    var match = new RegExp (/^#filters\/(\S+)$/);
+    var match = /^#filters\/(\S+)$/;
     var parsedUrl = location.hash.match(match);
     var filterId;
     if (parsedUrl) {
-      console.log(parsedUrl);
-      filterId = parsedUrl[0];
-      console.log(filterId);
+      filterId = parsedUrl[1];
     } else {
       filterId = 'reviews-all';
     }
