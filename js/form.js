@@ -1,8 +1,21 @@
 'use strict';
 
 define(function() {
+  /**
+   * Контейнер оверлейя поверх страницы где находится форма.
+   * @type {Element}
+   */
   var formContainer = document.querySelector('.overlay-container');
+
+  /**
+   * Контейнер с кнопкой добавить новый отзыв.
+   * @type {Element}
+   */
   var formOpenButton = document.querySelector('.reviews-controls-new');
+  /**
+   * Крестик закрыть форму.
+   * @type {Element}
+   */
   var formCloseButton = document.querySelector('.review-form-close');
 
   formOpenButton.onclick = function(evt) {
@@ -15,15 +28,41 @@ define(function() {
     formContainer.classList.add('invisible');
   };
 
+  /**
+   * Контейнер формы.
+   * @type {Element}
+   */
   var formElement = document.querySelector('.review-form'),
+    /**
+     * Поле заполнить имя.
+     * @type {Element}
+     */
     reviewName = document.querySelector('.review-form-field-name'),
+    /**
+     * Поле заполнить отзыв.
+     * @type {Element}
+     */
     reviewText = document.querySelector('.review-form-field-text'),
+    /**
+     * Поставить оценку.
+     * @type {Element}
+     */
     reviewMark = document.querySelectorAll('[name=review-mark]'),
 
     reviewFormControls = document.querySelector('.review-form-controls'),
     reviewFieldslName = document.querySelector('.review-fields-name'),
     reviewFieldsText = document.querySelector('.review-fields-text');
 
+
+  /**
+   * Валидация формы отправки нового отзыва
+   * проверяет если хотя бы один символ поля имени
+   * и отзыва заполнены - можно отправлять
+   * если хотя бы одно из полей не заполнено -
+   * отправлять нельзя
+   * как только поле заполнено его элемент "необходимо заполнить"
+   * скрывается
+   */
 
   function validate() {
 
@@ -49,6 +88,9 @@ define(function() {
     }
   }
 
+  /**
+   * Рассчет даты истечения действия куки
+   */
 
   function calculateDateExpire() {
     var dateCurrent = new Date();
