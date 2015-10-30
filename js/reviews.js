@@ -10,6 +10,11 @@ define([
   'gallery'
 ], function(Review, Gallery) {
 
+  /**
+   * Константы, описывающие состояние ReadyState.
+   * @enum {number}
+   */
+
   var readyState = {
     'UNSENT': 0,
     'OPENED': 1,
@@ -18,12 +23,45 @@ define([
     'DONE': 4
   };
 
+  /**
+   * Константа, через сколько объявить failure загрузки.
+   * @const
+   * @enum {number}
+   */
+
   var REQUEST_FAILURE_TIMEOUT = 10000;
+
+  /**
+   * Константа, количество отзывов на страницу.
+   * @const
+   * @enum {number}
+   */
+
   var PAGE_SIZE = 3;
+
+  /**
+   * Список отзывов (данные).
+   * @type {Array}
+   */
+
   var reviews;
+
+  /**
+   * Список Review (данные).
+   * @type {Array}
+   */
+
   var renderedReviews = [];
+
+  /**
+   * контейнер для отзывов.
+   * @type {Element}
+   */
+
   var reviewsSection = document.querySelector('reviews');
+
   var currentReviews;
+
   var currentPage = 0;
 
   var reviewsContainer = document.querySelector('.reviews-list');
