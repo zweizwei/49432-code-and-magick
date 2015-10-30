@@ -58,13 +58,36 @@ define([
    * @type {Element}
    */
 
+  /**
+   * Секция с reviews - контролы, список ревью, фильтрация.
+   * @type {Array}
+   */
+
   var reviewsSection = document.querySelector('reviews');
 
   var currentReviews;
 
+  /**
+   * текущая страница.
+   * @type {number}
+   */
+
   var currentPage = 0;
 
+  /**
+   * контейнер с reviews - только отзывы.
+   * @type {Element}
+   */
+
   var reviewsContainer = document.querySelector('.reviews-list');
+
+  /**
+   * Выводит на страницу список отзывов постранично.
+   * @param {Array.<Object>} reviewsToRender
+   * @param {number} pageNumber
+   * @param {boolean=} replace
+   */
+
 
   function renderReviews(reviewsToRender, pageNumber, replace) {
 
@@ -98,10 +121,21 @@ define([
 
   }
 
+  /**
+   * Добавляет класс ошибки контейнеру с отзывами. Используется в случае
+   * если произошла ошибка загрузки отелей или загрузка прервалась
+   * по таймауту.
+   */
+
   function showFailure() {
     reviewsSection.classList.add('reviews-load-failure');
   }
 
+  /**
+   * Загрузка списка отелей. После успешной загрузки вызывается функция
+   * callback, которая передается в качестве аргумента.
+   * @param {function} callback
+   */
 
   function loadReviews(callback) {
     var xhr = new XMLHttpRequest();
@@ -137,6 +171,17 @@ define([
       showFailure();
     };
   }
+
+  /**
+   * Фильтрация списка отзывов. Принимает на вход список отелей
+   * и ID фильтра. В зависимости от переданного ID применяет
+   * разные алгоритмы фильтрации. Возвращает отфильтрованный
+   * список и записывает примененный фильтр в адресную строку.
+   * Не изменяет исходный массив.
+   * @param {Array.<Object>} reviewToFilter
+   * @param {string} filterID
+   * @return {Array.<Object>}
+   */
 
   function filterReviews(reviewsToFilter, filterID) {
 
@@ -186,11 +231,25 @@ define([
     return filteredReviews;
   }
 
+  /**
+   * Вызывает функцию фильтрации на списке отелей с переданным fitlerID
+   * и подсвечивает кнопку активного фильтра.
+   * @param {string} filterID
+   */
+
   function setActiveFilter(filterID) {
     currentPage = 0;
     currentReviews = filterReviews(reviews, filterID);
     renderReviews(currentReviews, currentPage, true);
   }
+
+  /**
+   * Инициализация подписки на клики по кнопкам фильтра.
+   * Используется делегирование событий: события обрабатываются на объекте,
+   * содержащем все фильтры, и в момент наступления события, проверяется,
+   * произошел ли клик по фильтру или нет и если да, то вызывается функция
+   * установки фильтра.
+   */
 
   function initFilters() {
     var filtersContainer = document.querySelector('.reviews-filter');
@@ -199,6 +258,11 @@ define([
       location.hash = 'filters/' + clickedFilter.id;
     });
   }
+
+  /**
+   * Проверяет можно ли отрисовать следующую страницу списка отелей.
+   * @return {boolean}
+   */
 
   function isNextPageAvailable() {
     return currentPage < Math.ceil(reviews.length / PAGE_SIZE);
@@ -210,6 +274,16 @@ define([
       renderReviews(currentReviews, ++currentPage, false);
     }
   });
+
+  /**
+   * Получает значение адресной строки после #.
+   * Сравнивает ее с заданным значением
+   * Записывает подходящие после сравнения данные в новый массив
+   * выбирает из массива значение без пути
+   * записывает его в filterID (текущий фильтр) и устанавливает фильтрацию
+   * по выбранному фильтру
+   * @return {boolean}
+   */
 
   function parseUrl() {
     var match = /^#filters\/(\S+)$/;
@@ -236,6 +310,12 @@ define([
 
   var galleryContainer = document.querySelector('.photogallery');
   var gallery;
+
+  /**
+   * Добавляет обработчик события клика по картинке для открытия галереи
+   * При наступлении этого события, показывает фотогалерею и загружает в нее фотографии,
+   * фотографии выбираются из блока галлереи на страницы
+   */
 
   function initGallery() {
     galleryContainer.addEventListener('click', function(evt) {
