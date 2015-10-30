@@ -7,7 +7,7 @@ requirejs.config({
   baseUrl: 'js'
 });
 
-define([
+require([
   'gallery',
   'review',
   'game',
@@ -17,6 +17,5 @@ define([
   'game_demo',
   'reviews',
   'form'
-], function(Gallery, Review, Game) {
-});
+]);
 

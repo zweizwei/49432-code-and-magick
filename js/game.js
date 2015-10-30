@@ -698,8 +698,6 @@ define(function() {
     }
   };
 
-
+  Game.Verdict = Verdict;
   return Game;
-  //return Game.Verdict;
-
 });
