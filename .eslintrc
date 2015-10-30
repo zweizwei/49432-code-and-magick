@@ -6,6 +6,7 @@ globals:
   Gallery: true
   Review: true
   Game: true
+  require: true
   requirejs: true
 
 
