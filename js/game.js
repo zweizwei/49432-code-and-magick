@@ -184,7 +184,7 @@ define(function() {
 
   /**
    * перечень соответствий состояний игры и сообщений для этих состояний
-   * @enum {number}
+   * @enum {string}
    */
 
   var Message = {
@@ -385,7 +385,8 @@ define(function() {
     },
 
     /**
-     * делает rect message.
+     * делает прямоугольник на canvas и выводит в нем message.
+     * @param {string} message
      */
 
     _drawText: function(message) {

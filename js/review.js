@@ -3,6 +3,10 @@
 
 define(function() {
 
+  /**
+   * @type {Object.<string, string>}
+   */
+
   var ratingClassName = {
     '4': 'review-rating-one',
     '5': 'review-rating-two',
@@ -11,13 +15,33 @@ define(function() {
     '8': 'review-rating-five'
   };
 
+  /**
+   * @const
+   * @type {number}
+   */
+
   var PICTURE_SIDE_SIZE = 124;
 
+  /**
+   * Конструктор объекта Review. Создает новый объект типа Review,
+   * фильтрует данные полученные из файла,
+   * грузит данные о review в html шаблон,
+   * осуществляет постраничный вывод Review по клику на кнопку
+   * @param {Element} container
+   * @constructor
+   */
 
   var Review = function(data) {
     this._data = data;
     this.element = null;
   };
+
+  /**
+   * Отрисовка одного Review
+   * @param {Element} container
+   *
+   */
+
 
   Review.prototype.render = function(container) {
     var reviewTemplate = document.getElementById('review-template');
@@ -47,6 +71,12 @@ define(function() {
       this.element = newReviewElement;
     }
   };
+
+  /**
+   * разотрисовка одного Review
+   * @param {Element} container
+   *
+   */
 
   Review.prototype.unrender = function() {
     this.element.parentNode.removeChild(this.element);
